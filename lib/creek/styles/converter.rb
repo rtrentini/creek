@@ -105,10 +105,10 @@ module Creek
       # http://msdn.microsoft.com/en-us/library/ff530155(v=office.12).aspx
       def base_date
         @base_date ||= begin
-          # return DATE_SYSTEM_1900 if xml.workbook == nil
-          # xml.workbook.xpath("//workbook/workbookPr[@date1904]").each do |workbookPr|
-          #   return DATE_SYSTEM_1904 if workbookPr["date1904"] =~ /true|1/i
-          # end
+          return DATE_SYSTEM_1900 if xml.workbook == nil
+          xml.workbook.xpath("//workbook/workbookPr[@date1904]").each do |workbookPr|
+            return DATE_SYSTEM_1904 if workbookPr["date1904"] =~ /true|1/i
+          end
           DATE_SYSTEM_1900
         end
       end
